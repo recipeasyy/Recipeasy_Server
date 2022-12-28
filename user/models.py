@@ -5,23 +5,23 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
-    def create_user(self, email, realname):
-        if not email:
-            raise ValueError('must have email')
+    def create_user(self, username, realname):
+        if not username:
+            raise ValueError('must have username')
 
         if not realname:
             raise ValueError('must have realname')
 
         user = self.model(
-            email=email,
+            username=username,
             realname=realname,
         )
 
         user.save()
         return user
 
-    def create_superuser(self, email, realname, password):
-        user = self.create_user(email=email, realname=realname)
+    def create_superuser(self, username, realname, password):
+        user = self.create_user(username=username, realname=realname)
         user.set_password(password)
         user.is_staff = True  # 슈퍼유저 권한 부여
         user.is_superuser = True  # 슈퍼유저 권한 부여
@@ -32,7 +32,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser):
     objects = UserManager()
 
-    email = models.CharField(max_length=200, unique=True)
+    username = models.CharField(max_length=200, unique=True)
     realname = models.CharField(max_length=20)
 
     nickname = models.CharField(max_length=50, unique=True, blank=True, null=True) # 추후에 api post 요청으로 닉네임 받아와야함
@@ -43,8 +43,8 @@ class User(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['realname',]
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['realname', ]
 
     class Meta:
         managed = True
