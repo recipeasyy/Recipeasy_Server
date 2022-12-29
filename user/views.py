@@ -3,18 +3,20 @@ from django.shortcuts import  redirect
 import requests
 
 # Create your views here.
+from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from Recipeasy_Server.settings import env
 from user.models import User
+from user.serializer import UserSerializer
 from user.utils import get_tokens_for_user
 
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def KakaoLogin(request):
+def KakaoLoginView(request):
 
     code = request.GET.get('code', None)
 
@@ -64,3 +66,36 @@ def KakaoLogin(request):
     data = {'realname': realname, 'username': username, 'access_token': token[access_token], 'refresh_token': token[refresh_token]}
 
     return Response(data, status=200)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def UpdateNicknameView(request):
+
+    serializer = UserSerializer(data=request.data)
+    print(request.data)
+    print(UserSerializer())
+
+    if serializer.is_valid():
+        user = User.objects.filter(username=request.user.username)
+
+        # 유저가 발견되지 않은 경우
+        if not len(user):
+            return Response({'Message': 'User does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+        user = user[0]
+
+        # 유저가 이미 닉네임을 설정한 경우
+        if user.nickname:
+            return Response({'Message': 'User already has a nickname'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user.nickname = serializer.data['nickname']
+        user.save()
+        serializer = UserSerializer(user)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    print(serializer.errors)
+    return Response({'Message': 'Error occurred'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
