@@ -21,18 +21,7 @@ class Theme(models.Model):
 
     tips = models.URLField(blank=True, null=True)
 
-    # saved_user = models.ManyToManyField('user.User', through='UserTheme')
-
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"[{self.theme_type}] {self.title}, {self.description[:10]}..."
-
-#
-#
-# class UserTheme(models.Model):
-#     user = models.ForeignKey('user.User', on_delete=models.CASCADE)
-#     theme = models.ForeignKey('Theme', on_delete=models.CASCADE)
-#
-#     created_at = models.DateTimeField(auto_now_add=True)
-
