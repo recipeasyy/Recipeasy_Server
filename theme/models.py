@@ -1,8 +1,6 @@
 from django.db import models
 
 # Create your models here.
-from user.models import User
-
 
 class ThemeType(models.Model):
     title = models.CharField(max_length=50)
