@@ -63,7 +63,9 @@ def KakaoLoginView(request):
 
     token = get_tokens_for_user(user)
 
-    data = {'realname': realname, 'username': username, 'access_token': token[access_token], 'refresh_token': token[refresh_token]}
+    print(token)
+
+    data = {'realname': realname, 'username': username, 'access_token': token['access'], 'refresh_token': token['refresh']}
 
     return Response(data, status=200)
 
