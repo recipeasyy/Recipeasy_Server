@@ -7,6 +7,7 @@ FROM python:3.8.3-alpine as builder
 # set work directory
 WORKDIR /usr/src/app
 
+RUN echo "change"
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
