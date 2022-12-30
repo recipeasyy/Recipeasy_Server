@@ -16,13 +16,13 @@ from user.utils import get_tokens_for_user
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def LoginURLView(request):
+def login_url_view(request):
     return Response({"URL": f"https://kauth.kakao.com/oauth/authorize?client_id={env('KAKAO_CLIENT_ID')}&redirect_uri={env('KAKAO_REDIRECT_URI')}&response_type=code"})
 
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def KakaoLoginView(request):
+def kakao_login_view(request):
 
     code = request.GET.get('code', None)
 
@@ -75,7 +75,7 @@ def KakaoLoginView(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def UpdateNicknameView(request):
+def update_nickname_view(request):
 
     serializer = UserSerializer(data=request.data)
 
