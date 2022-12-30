@@ -5,12 +5,13 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from user.views import KakaoLoginView, UpdateNicknameView
+from user.views import KakaoLoginView, UpdateNicknameView, LoginURLView
 
 urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
+    path('login', LoginURLView, name="login_url"),
     path('auth/kakao', KakaoLoginView, name="kakao_login"),
 
     path('user/nickname', UpdateNicknameView, name='update_nickname')

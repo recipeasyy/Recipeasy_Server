@@ -16,6 +16,12 @@ from user.utils import get_tokens_for_user
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
+def LoginURLView(request):
+    return Response({"URL": f"https://kauth.kakao.com/oauth/authorize?client_id={env('KAKAO_CLIENT_ID')}&redirect_uri={env('KAKAO_REDIRECT_URI')}&response_type=code"})
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def KakaoLoginView(request):
 
     code = request.GET.get('code', None)
@@ -37,7 +43,6 @@ def KakaoLoginView(request):
     token_req = requests.post(url, headers=headers, data=data)
     token_req_json = token_req.json()
     access_token = token_req_json.get("access_token")
-    refresh_token = token_req_json.get("refresh_token")
 
     kakao_api_response = requests.post(
         "https://kapi.kakao.com/v2/user/me",
@@ -62,8 +67,6 @@ def KakaoLoginView(request):
         user = User.objects.get(username=username)
 
     token = get_tokens_for_user(user)
-
-    print(token)
 
     data = {'realname': realname, 'username': username, 'access_token': token['access'], 'refresh_token': token['refresh']}
 
