@@ -21,7 +21,7 @@ class RequiredIngredient(models.Model):
     name = models.CharField(max_length=50)
     quantity = models.CharField(max_length=30)
     substitute = models.CharField(max_length=50, null=True)
-    imoji = models.URLField(max_length=2000)
+    emoji = models.CharField(max_length=50)
     recipe = models.ForeignKey(
         'Recipe', on_delete=models.CASCADE, related_name='required_ingredients')
 
@@ -33,7 +33,7 @@ class AdditionalIngredient(models.Model):
     name = models.CharField(max_length=50)
     quantity = models.CharField(max_length=30)
     substitute = models.CharField(max_length=50, null=True)
-    imoji = models.URLField(max_length=2000)
+    emoji = models.CharField(max_length=50)
     recipe = models.ForeignKey(
         'Recipe', on_delete=models.CASCADE, related_name='additional_ingredients')
 
