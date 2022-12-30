@@ -58,10 +58,10 @@ def KakaoLoginView(request):
     username = f'Recipeasy-{user_id}'
     realname = kakao_api_response.get('properties').get('nickname')
 
-    try: #새로운 유저를 생성하는 경우
+    try:
         user = User.objects.get(username=username)
 
-    except: #유저가 이미 존재하는 경우
+    except:
         user = User(username=username, realname=realname)
         user.save()
         user = User.objects.get(username=username)
@@ -78,28 +78,23 @@ def KakaoLoginView(request):
 def UpdateNicknameView(request):
 
     serializer = UserSerializer(data=request.data)
-    print(request.data)
-    print(UserSerializer())
 
     if serializer.is_valid():
         user = User.objects.filter(username=request.user.username)
 
-        # 유저가 발견되지 않은 경우
         if not len(user):
             return Response({'Message': 'User does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
         user = user[0]
 
-        # 유저가 이미 닉네임을 설정한 경우
         if user.nickname:
             return Response({'Message': 'User already has a nickname'}, status=status.HTTP_400_BAD_REQUEST)
 
         user.nickname = serializer.data['nickname']
         user.save()
-        serializer = UserSerializer(user)
 
-        return Response(serializer.data, status=status.HTTP_200_OK)
-    print(serializer.errors)
+        return Response({"Message": "Nickname successfully set", "nickname": user.nickname}, status=status.HTTP_200_OK)
+
     return Response({'Message': 'Error occurred'}, status=status.HTTP_400_BAD_REQUEST)
 
 

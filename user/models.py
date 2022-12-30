@@ -41,7 +41,7 @@ class User(AbstractBaseUser):
     deleted_at = models.DateTimeField(blank=True, null=True)
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-    saved_themes = models.ManyToManyField(Theme, related_name='saved_users')
+    saved_themes = models.ManyToManyField(Theme, related_name='saved_users', blank=True, null=True)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['realname', ]
