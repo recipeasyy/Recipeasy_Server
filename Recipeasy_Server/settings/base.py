@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'recipes',
     'mypages',
     'rest_framework_simplejwt.token_blacklist',
-    'corsheaders'
+    'corsheaders',
+    'health_check',
 ]
 
 REST_FRAMEWORK = {
