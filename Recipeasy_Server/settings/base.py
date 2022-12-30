@@ -95,6 +95,9 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
+CORS_ALLOW_CREDENTIALS = True
+
+
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
