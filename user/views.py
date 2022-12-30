@@ -27,7 +27,7 @@ def kakao_login_view(request):
     code = request.GET.get('code', None)
 
     headers = {
-        'Access-Control-Allow-Origin': 'http://127.0.0.1:8000',
+        'Access-Control-Allow-Origin': f'{env("API_ENDPOINT")}',
         'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
     }
 
@@ -49,7 +49,7 @@ def kakao_login_view(request):
         headers={
             "Authorization": f"Bearer {access_token}",
             "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
-            "Access-Control-Allow-Origin": "http://127.0.0.1:8000",
+            "Access-Control-Allow-Origin": f'{env("API_ENDPOINT")}',
         },
     ).json()
 
