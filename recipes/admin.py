@@ -14,7 +14,7 @@ class RecipeAdmin(admin.ModelAdmin):
         return obj.theme.title
 
 
-@admin.register(RequiredIngredients)
+@admin.register(RequiredIngredient)
 class RequiredIngredientsAdmin(admin.ModelAdmin):
     list_display = ['name', 'quantity', 'substitute', 'get_title']
     list_display_links = ['name', 'quantity', 'substitute', 'get_title']
@@ -24,7 +24,7 @@ class RequiredIngredientsAdmin(admin.ModelAdmin):
         return obj.recipe.title
 
 
-@admin.register(AdditionalIngredients)
+@admin.register(AdditionalIngredient)
 class AdditionalIngredientsAdmin(admin.ModelAdmin):
     list_display = ['name', 'quantity', 'substitute', 'get_title']
     list_display_links = ['name', 'quantity', 'substitute', 'get_title']

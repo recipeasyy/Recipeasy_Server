@@ -17,7 +17,7 @@ class Recipe(models.Model):
         return f'{self.title}'
 
 
-class RequiredIngredients(models.Model):
+class RequiredIngredient(models.Model):
     name = models.CharField(max_length=50)
     quantity = models.CharField(max_length=30)
     substitute = models.CharField(max_length=50, null=True)
@@ -29,7 +29,7 @@ class RequiredIngredients(models.Model):
         return f'{self.name}'
 
 
-class AdditionalIngredients(models.Model):
+class AdditionalIngredient(models.Model):
     name = models.CharField(max_length=50)
     quantity = models.CharField(max_length=30)
     substitute = models.CharField(max_length=50, null=True)
