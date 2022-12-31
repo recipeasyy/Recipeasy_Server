@@ -5,5 +5,6 @@ app_name = 'recipes'
 
 urlpatterns = [
     path('list/', RecipeListView.as_view()),
-    path('detail/<int:pk>/', RecipeDetailView.as_view()),
+    path('list_in_theme/<int:pk>/', RecipeListInThemeView.as_view()),
+    path('<int:pk>/', RecipeDetailView.as_view()),
 ]

@@ -18,6 +18,13 @@ class RecipeListView(APIView):
         return Response({'message': '레시피 목록 조회 성공', 'data': serializer.data}, status=HTTP_200_OK)
 
 
+class RecipeListInThemeView(APIView):
+    def get(self, request, pk):
+        recipes = Recipe.objects.filter(theme=pk)
+        serializer = RecipeSerializer(recipes, many=True)
+        return Response({'message': '테마에 속하는 레시피 목록 조회 성공', 'data': serializer.data}, status=HTTP_200_OK)
+
+
 class RecipeDetailView(APIView):
     def get(self, request, pk):
         recipe = get_object_or_404(Recipe, pk=pk)
