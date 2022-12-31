@@ -11,7 +11,10 @@ class RecipeAdmin(admin.ModelAdmin):
 
     @admin.display(ordering='theme__title', description='Theme')
     def get_title(self, obj):
-        return obj.theme.title
+        if obj.theme is not None:
+            return obj.theme.title
+        else:
+            return None
 
 
 @admin.register(RequiredIngredient)
