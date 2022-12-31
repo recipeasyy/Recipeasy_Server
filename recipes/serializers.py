@@ -48,10 +48,10 @@ class RecipeDetailSerializer(serializers.ModelSerializer):
         many=True, read_only=True)
     additional_ingredients = AdditionalIngredientSerializer(
         many=True, read_only=True)
-    equipments = EquipmentSerializer(many=True, read_only=True)
-    recipe_sequences = RecipeSequenceSerializer(many=True, read_only=True)
+    equipment = EquipmentSerializer(many=True, read_only=True)
+    recipe_sequence = RecipeSequenceSerializer(many=True, read_only=True)
 
     class Meta:
         model = Recipe
         fields = ['title', 'description', 'difficulty', 'time_taken', 'save_count',
-                  'required_ingredients', 'additional_ingredients', 'equipments', 'recipe_sequences']
+                  'required_ingredients', 'additional_ingredients', 'equipment', 'recipe_sequence']
