@@ -30,8 +30,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['recipeasy.link',
-                 '127.0.0.1:8000', '43.200.137.205', ]
+ALLOWED_HOSTS = ['recipeasy.link', '127.0.0.1:8000', '43.200.137.205']
 
 AUTH_USER_MODEL = 'user.User'
 
@@ -97,8 +96,6 @@ CORS_ALLOW_ALL_ORIGINS = True
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
 CORS_ALLOW_CREDENTIALS = True
-
-CSRF_TRUSTED_ORIGINS=['https://*.recipeasy.link', 'https://recipeasy.link']
 
 
 MIDDLEWARE = [
