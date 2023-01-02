@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
 from rest_framework.status import *
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 from .serializers import *
 from .models import *
@@ -14,6 +15,8 @@ from .models import *
 
 
 class RecipeListView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         recipes = Recipe.objects.all()
         serializer = RecipeSerializer(recipes, many=True)
@@ -21,6 +24,8 @@ class RecipeListView(APIView):
 
 
 class RecipeListInThemeView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, pk):
         recipes = Recipe.objects.filter(theme=pk)
         serializer = RecipeSerializer(recipes, many=True)
@@ -28,6 +33,8 @@ class RecipeListInThemeView(APIView):
 
 
 class RecipeDetailView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, pk):
         recipe = get_object_or_404(Recipe, pk=pk)
         serializer = RecipeDetailSerializer(recipe)
@@ -35,6 +42,7 @@ class RecipeDetailView(APIView):
 
 
 class RecipeSearchView(ListAPIView):
+    permission_classes = [IsAuthenticated]
     serializer_class = RecipeSerializer
 
     def get_queryset(self, *args, **kwargs):
