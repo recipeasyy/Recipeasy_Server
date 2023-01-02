@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
+from recipes.models import Recipe
 from theme.models import Theme
 
 
@@ -42,7 +43,7 @@ class User(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     saved_themes = models.ManyToManyField(Theme, related_name='saved_users', blank=True, null=True)
-    saved_recipes = models.ManyToManyField('Recipe', related_name='saved_users', blank=True, null=True)
+    saved_recipes = models.ManyToManyField(Recipe, related_name='saved_users', blank=True, null=True)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['realname', ]
