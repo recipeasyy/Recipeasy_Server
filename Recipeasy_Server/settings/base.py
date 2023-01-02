@@ -97,6 +97,7 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
 CORS_ALLOW_CREDENTIALS = True
 
+CSRF_TRUSTED_ORIGINS = ['https://*.recipeasy.link', 'https://recipeasy.link']
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
