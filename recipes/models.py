@@ -11,7 +11,7 @@ class Recipe(models.Model):
     time_taken = models.CharField(max_length=20)
     save_count = models.IntegerField(default=0)
     theme = models.ForeignKey(
-        Theme, blank=True, null=True, on_delete=models.SET_NULL)
+        Theme, blank=True, null=True, on_delete=models.SET_NULL, related_name='recipes')
 
     def __str__(self):
         return f'{self.title}'
