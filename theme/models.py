@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+from user.models import User
+
 
 class ThemeType(models.Model):
     title = models.CharField(max_length=50)
@@ -15,6 +17,8 @@ class Theme(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     recipe_count = models.IntegerField(default=0)
+    save_count = models.IntegerField(default=0)
+    saved_user = models.ManyToManyField(User, related_name='saved_themes', blank=True, null=True)
     duration = models.IntegerField(default=0)
     tips = models.URLField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)

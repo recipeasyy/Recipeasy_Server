@@ -97,5 +97,13 @@ def update_nickname_view(request):
 
     return Response({'Message': 'Error occurred'}, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def user_info_view(request):
 
+    user = User.objects.filter(username=request.user.username)
+
+    serializer = UserSerializer(user, many=True)
+
+    return Response({"data": serializer.data}, status=status.HTTP_200_OK)
 
