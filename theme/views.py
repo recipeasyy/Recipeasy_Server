@@ -1,8 +1,10 @@
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -41,3 +43,16 @@ class ThemeDetailView(APIView):
         theme.saved_user.add(User.objects.get(username=request.user.username))
 
         return Response({"Message": "Theme saved successfully"}, status=status.HTTP_200_OK)
+
+
+class ThemeSearchView(ListAPIView):
+    # permission_classes = [IsAuthenticated]
+    serializer_class = ThemeSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        query = self.request.GET.get("q")
+        queryset_list = Theme.objects.filter(
+            Q(title__icontains=query) | Q(
+                description__icontains=query)
+        ).distinct()
+        return queryset_list
