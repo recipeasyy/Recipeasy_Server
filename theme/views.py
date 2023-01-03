@@ -11,6 +11,8 @@ from recipes.models import Recipe
 from recipes.serializers import RecipeSerializer
 from theme.models import Theme, ThemeType
 from theme.serializers import ThemeSerializer, ThemeTypeSerializer
+from user.models import User
+
 
 class ThemeListView(APIView):
     permission_classes = [IsAuthenticated]
@@ -36,3 +38,6 @@ class ThemeDetailView(APIView):
 
     def post(self, request, id):
         theme = get_object_or_404(Theme, id=id)
+        theme.saved_user.add(User.objects.get(username=request.user.username))
+
+        return Response({"Message": "Theme saved successfully"}, status=status.HTTP_200_OK)
