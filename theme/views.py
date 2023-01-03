@@ -13,7 +13,7 @@ from theme.models import Theme, ThemeType
 from theme.serializers import ThemeSerializer, ThemeTypeSerializer
 
 class ThemeListView(APIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         theme_types = ThemeType.objects.all()
@@ -25,7 +25,7 @@ class ThemeListView(APIView):
 
 
 class ThemeDetailView(APIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, id):
         theme = get_object_or_404(Theme, id=id)
