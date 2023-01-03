@@ -11,7 +11,7 @@ class ThemeType(models.Model):
 
 
 class Theme(models.Model):
-    theme_type = models.ForeignKey(ThemeType, on_delete=models.SET_NULL, null=True)
+    theme_type = models.ForeignKey(ThemeType, on_delete=models.SET_NULL, null=True, related_name='themes')
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     recipe_count = models.IntegerField(default=0)
