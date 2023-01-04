@@ -26,5 +26,5 @@ class RecipeSaveView(APIView):
             data=request.data, instance=recipe, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response({'message': '레시피 저장 성공', 'data': {'id': serializer.data['id'], 'title': serializer.data['title'], 'save_count': serializer.data['save_count'], 'is_saved': is_bookmarked}}, status=HTTP_200_OK)
-        return Response({'message': '레시피 저장 실패', 'data': serializer.data}, status=HTTP_400_BAD_REQUEST)
+            return Response({'message': '레시피 저장 토글 성공', 'data': {'id': serializer.data['id'], 'title': serializer.data['title'], 'save_count': serializer.data['save_count'], 'is_saved': is_bookmarked}}, status=HTTP_200_OK)
+        return Response({'message': '레시피 저장 토글 실패', 'data': serializer.data}, status=HTTP_400_BAD_REQUEST)
