@@ -13,13 +13,6 @@ from user.models import User
 from user.serializer import UserSerializer
 from user.utils import get_tokens_for_user
 
-
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def login_url_view(request):
-    return Response({"URL": f"https://kauth.kakao.com/oauth/authorize?client_id={env('KAKAO_CLIENT_ID')}&redirect_uri={env('KAKAO_REDIRECT_URI')}&response_type=code"})
-
-
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def kakao_login_view(request):
@@ -97,5 +90,13 @@ def update_nickname_view(request):
 
     return Response({'Message': 'Error occurred'}, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def user_info_view(request):
 
+    user = User.objects.filter(username=request.user.username)
+
+    serializer = UserSerializer(user, many=True)
+
+    return Response({"data": serializer.data}, status=status.HTTP_200_OK)
 

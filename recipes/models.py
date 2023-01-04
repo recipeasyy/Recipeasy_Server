@@ -1,6 +1,7 @@
 from django.db import models
 from theme.models import Theme
 # Create your models here.
+from user.models import User
 
 
 class Recipe(models.Model):
@@ -10,8 +11,9 @@ class Recipe(models.Model):
     difficulty = models.IntegerField(default=3)
     time_taken = models.CharField(max_length=20)
     save_count = models.IntegerField(default=0)
+    saved_user = models.ManyToManyField(User, related_name='saved_recipes', blank=True, null=True)
     theme = models.ForeignKey(
-        Theme, blank=True, null=True, on_delete=models.SET_NULL)
+        Theme, blank=True, null=True, on_delete=models.SET_NULL, related_name='recipes')
 
     def __str__(self):
         return f'{self.title}'
