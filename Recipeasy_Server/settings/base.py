@@ -30,7 +30,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['recipeasy.link', '127.0.0.1:8000', '3.35.14.95']
+ALLOWED_HOSTS = ['recipeasy.link', '127.0.0.1:8000', '3.35.14.95', '127.0.0.1']
 
 AUTH_USER_MODEL = 'user.User'
 
@@ -56,6 +56,7 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     )
 }
 
