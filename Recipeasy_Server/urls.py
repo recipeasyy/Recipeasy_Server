@@ -21,5 +21,6 @@ urlpatterns = [
     path('', include('user.urls')),
     path('health_check/', include('health_check.urls')),
     path('recipes/', include('recipes.urls')),
-    path('theme/', include('theme.urls'))
+    path('mypages/', include('mypages.urls')),
+    path('theme/', include('theme.urls')),
 ]
