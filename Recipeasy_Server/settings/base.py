@@ -31,7 +31,7 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 DEBUG = env('DEBUG')
 
 
-ALLOWED_HOSTS = ['recipeasy.link', '127.0.0.1', '3.35.14.95']
+ALLOWED_HOSTS = ['recipeasy.link', '127.0.0.1', '3.35.14.95', '172.31.10.111']
 
 
 AUTH_USER_MODEL = 'user.User'
@@ -100,7 +100,7 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
 CORS_ALLOW_CREDENTIALS = True
 
-CSRF_TRUSTED_ORIGINS = ['https://*.recipeasy.link', 'https://recipeasy.link']
+CSRF_TRUSTED_ORIGINS = ['https://*.recipeasy.link', 'https://recipeasy.link', '*']
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
