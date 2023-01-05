@@ -1,6 +1,7 @@
 from .base import *  # noqa
 
 DEBUG = False
+
 ALLOWED_HOSTS = ['recipeasy.link', '127.0.0.1', '3.35.14.95', '172.31.10.111']
 
 DATABASES = {
