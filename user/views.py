@@ -58,7 +58,7 @@ def kakao_login_view(request):
         user = User.objects.get(username=username)
     token = get_tokens_for_user(user)
 
-    data = {'realname': realname, 'username': username, 'access_token': token['access'], 'refresh_token': token['refresh']}
+    data = {'realname': realname, 'username': username, 'access': token['access'], 'refresh': token['refresh']}
 
     return Response(data, status=200)
 
