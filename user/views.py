@@ -36,6 +36,7 @@ def kakao_login_view(request):
 
     token_req = requests.post(url, headers=headers, data=data)
     token_req_json = token_req.json()
+    print(token_req_json)
     access_token = token_req_json.get("access_token")
     kakao_api_response = requests.post(
         "https://kapi.kakao.com/v2/user/me",
@@ -45,7 +46,7 @@ def kakao_login_view(request):
             "Access-Control-Allow-Origin": f'{env("API_ENDPOINT")}',
         },
     ).json()
-
+    print(kakao_api_response)
     user_id = kakao_api_response.get('id')
     username = f'Recipeasy-{user_id}'
     realname = kakao_api_response.get('properties').get('nickname')
@@ -68,10 +69,8 @@ def kakao_login_view(request):
 def update_nickname_view(request):
 
     serializer = UserSerializer(data=request.data)
-
     if serializer.is_valid():
         user = User.objects.filter(username=request.user.username)
-
         if not len(user):
             return Response({'Message': 'User does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -84,7 +83,7 @@ def update_nickname_view(request):
         user.save()
 
         return Response({"Message": "Nickname successfully set", "nickname": user.nickname}, status=status.HTTP_200_OK)
-
+    print(serializer.errors)
     return Response({'Message': 'Error occurred'}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
