@@ -40,9 +40,16 @@ class ThemeDetailView(APIView):
 
     def post(self, request, id):
         theme = get_object_or_404(Theme, id=id)
-        theme.saved_user.add(User.objects.get(username=request.user.username))
+        user = User.objects.get(username=request.user.username)
+        if user in theme.saved_user.all():
+            theme.saved_user.remove(user)
+            theme.save_count -= 1
+            return Response({"Message": "Theme unsaved successfully"}, status=status.HTTP_200_OK)
+        else:
+            theme.saved_user.add(user)
+            theme.save_count += 1
+            return Response({"Message": "Theme saved successfully"}, status=status.HTTP_200_OK)
 
-        return Response({"Message": "Theme saved successfully"}, status=status.HTTP_200_OK)
 
 
 class ThemeSearchView(ListAPIView):

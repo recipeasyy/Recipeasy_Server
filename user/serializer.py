@@ -7,8 +7,8 @@ from user.models import User
 
 class UserSerializer(serializers.ModelSerializer):
 
-    saved_themes = ThemeSerializer(many=True)
-    saved_recipes = RecipeSerializer(many=True)
+    saved_themes = ThemeSerializer(many=True, required=False)
+    saved_recipes = RecipeSerializer(many=True, required=False)
 
     class Meta:
         model = User
