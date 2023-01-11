@@ -52,13 +52,18 @@ def kakao_login_view(request):
     try:
         user = User.objects.get(username=username)
 
+
     except:
         user = User(username=username, realname=realname)
         user.save()
         user = User.objects.get(username=username)
-    token = get_tokens_for_user(user)
 
-    data = {'realname': realname, 'username': username, 'access_token': token['access'], 'refresh_token': token['refresh']}
+    token = get_tokens_for_user(user)
+    data = {'realname': realname, 'username': username, 'access_token': token['access'], 'refresh_token': token['refresh'], 'has_nickname': False}
+
+    if user.nickname:
+        data['nickname'] = user.nickname
+        data['has_nickname'] = True
 
     return Response(data, status=200)
 
