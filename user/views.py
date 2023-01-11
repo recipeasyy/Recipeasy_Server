@@ -36,7 +36,6 @@ def kakao_login_view(request):
 
     token_req = requests.post(url, headers=headers, data=data)
     token_req_json = token_req.json()
-    print(token_req_json)
     access_token = token_req_json.get("access_token")
     kakao_api_response = requests.post(
         "https://kapi.kakao.com/v2/user/me",
@@ -46,20 +45,21 @@ def kakao_login_view(request):
             "Access-Control-Allow-Origin": f'{env("API_ENDPOINT")}',
         },
     ).json()
-    print(kakao_api_response)
     user_id = kakao_api_response.get('id')
     username = f'Recipeasy-{user_id}'
     realname = kakao_api_response.get('properties').get('nickname')
     try:
         user = User.objects.get(username=username)
-
     except:
         user = User(username=username, realname=realname)
         user.save()
         user = User.objects.get(username=username)
     token = get_tokens_for_user(user)
+    data = {'realname': realname, 'username': username, 'access': token['access'], 'refresh': token['refresh'], 'has_nickname': False}
+    if user.nickname:
+        data['nickname'] = user.nickname
+        data['has_nickname'] = True
 
-    data = {'realname': realname, 'username': username, 'access': token['access'], 'refresh': token['refresh']}
 
     return Response(data, status=200)
 
