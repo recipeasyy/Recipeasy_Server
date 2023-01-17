@@ -6,12 +6,14 @@ from user.models import User
 
 class Recipe(models.Model):
     video = models.URLField(max_length=2000)
+    image = models.URLField(max_length=2000)
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=300)
     difficulty = models.IntegerField(default=3)
     time_taken = models.CharField(max_length=20)
     save_count = models.IntegerField(default=0)
-    saved_user = models.ManyToManyField(User, related_name='saved_recipes', blank=True, null=True)
+    saved_user = models.ManyToManyField(
+        User, related_name='saved_recipes', blank=True, null=True)
     theme = models.ForeignKey(
         Theme, blank=True, null=True, on_delete=models.SET_NULL, related_name='recipes')
 
