@@ -13,12 +13,15 @@ class ThemeType(models.Model):
 
 
 class Theme(models.Model):
-    theme_type = models.ForeignKey(ThemeType, on_delete=models.SET_NULL, null=True, related_name='themes')
+    theme_type = models.ForeignKey(
+        ThemeType, on_delete=models.SET_NULL, null=True, related_name='themes')
     title = models.CharField(max_length=100)
+    image = models.URLField(max_length=2000)
     description = models.TextField(blank=True, null=True)
     recipe_count = models.IntegerField(default=0)
     save_count = models.IntegerField(default=0)
-    saved_user = models.ManyToManyField(User, related_name='saved_themes', blank=True, null=True)
+    saved_user = models.ManyToManyField(
+        User, related_name='saved_themes', blank=True, null=True)
     duration = models.IntegerField(default=0)
     tips = models.URLField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
