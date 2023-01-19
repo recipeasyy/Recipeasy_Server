@@ -9,7 +9,7 @@ class ThemeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Theme
-        fields = ["id", "title", "description", "recipe_count", "save_count", "duration", "tips", "theme_type", "recipes"]
+        fields = ["id", "title", "description", "recipe_count", "save_count", "duration", "tips", "theme_type", "recipes", 'image']
 
 
 class ThemeTypeSerializer(serializers.ModelSerializer):
