@@ -44,10 +44,12 @@ class ThemeDetailView(APIView):
         if user in theme.saved_user.all():
             theme.saved_user.remove(user)
             theme.save_count -= 1
+            theme.save()
             return Response({"Message": "Theme unsaved successfully"}, status=status.HTTP_200_OK)
         else:
             theme.saved_user.add(user)
             theme.save_count += 1
+            theme.save()
             return Response({"Message": "Theme saved successfully"}, status=status.HTTP_200_OK)
 
 
