@@ -33,9 +33,9 @@ class ThemeDetailView(APIView):
 
     def get(self, request, id):
         theme = get_object_or_404(Theme, id=id)
+        print(theme.theme_type.title)
         serializer = ThemeSerializer(theme)
-
-        return Response({"theme": serializer.data}, status=status.HTTP_200_OK)
+        return Response({"theme": serializer.data, 'theme_type_name': theme.theme_type.title}, status=status.HTTP_200_OK)
 
 
     def post(self, request, id):
