@@ -55,7 +55,7 @@ class ThemeDetailView(APIView):
 
 
 class ThemeSearchView(ListAPIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     serializer_class = ThemeSerializer
 
     def get_queryset(self, *args, **kwargs):
