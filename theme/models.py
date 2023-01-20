@@ -16,7 +16,8 @@ class Theme(models.Model):
     theme_type = models.ForeignKey(
         ThemeType, on_delete=models.SET_NULL, null=True, related_name='themes')
     title = models.CharField(max_length=100)
-    image = models.URLField(max_length=2000)
+    landscape_image = models.URLField(max_length=2000)
+    portrait_image = models.URLField(max_length=2000)
     description = models.TextField(blank=True, null=True)
     recipe_count = models.IntegerField(default=0)
     save_count = models.IntegerField(default=0)
