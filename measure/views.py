@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -10,7 +11,9 @@ from measure.serializers import MeasurementSerializer
 
 
 class MeasurementView(APIView):
-    def get(self):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
         measurements = Measurement.objects.all()
         measurements_serializer = MeasurementSerializer(measurements, many=True)
 

@@ -11,6 +11,8 @@ from recipes.models import *
 
 
 class RecipeSaveView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, request, pk):
         recipe = get_object_or_404(Recipe, pk=pk)
         user = request.user
@@ -32,6 +34,8 @@ class RecipeSaveView(APIView):
 
 
 class RecipeSaveListView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         recipes = request.user.saved_recipes.all()
         serializer = RecipeSerializer(recipes, many=True)
