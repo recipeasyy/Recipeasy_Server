@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'user',
     'recipes',
     'mypages',
+    'measure',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'health_check',
