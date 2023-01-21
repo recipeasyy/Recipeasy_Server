@@ -5,7 +5,7 @@ from user.models import User
 
 
 class Recipe(models.Model):
-    video = models.URLField(max_length=2000)
+    video_id = models.CharField(max_length=2000)
     image = models.URLField(max_length=2000)
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=300)
