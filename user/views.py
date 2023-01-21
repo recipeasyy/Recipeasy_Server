@@ -19,7 +19,6 @@ def kakao_login_view(request):
 
     code = request.GET.get('code', None)
 
-
     headers = {
         'Access-Control-Allow-Origin': f'{env("API_ENDPOINT")}',
         'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
@@ -28,7 +27,7 @@ def kakao_login_view(request):
     data = {
         'grant_type': 'authorization_code',
         'client_id': env('KAKAO_CLIENT_ID'),
-        'redirect_uri': env('KAKAO_REDIRECT_URI'),
+        'redirect_uri': request.GET.get('redirect_uri', None),
         'code': code
     }
 
