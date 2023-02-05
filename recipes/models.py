@@ -58,6 +58,7 @@ class RecipeSequence(models.Model):
     order = models.IntegerField()
     short_desc = models.CharField(max_length=300)
     long_desc = models.CharField(max_length=1000)
+    time = models.CharField(max_length=20)
     image = models.URLField(max_length=2000)
     recipe = models.ForeignKey(
         'Recipe', on_delete=models.CASCADE, related_name='recipe_sequence')

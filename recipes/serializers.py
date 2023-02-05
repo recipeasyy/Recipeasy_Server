@@ -29,7 +29,7 @@ class EquipmentSerializer(serializers.ModelSerializer):
 class RecipeSequenceSerializer(serializers.ModelSerializer):
     class Meta:
         model = RecipeSequence
-        fields = ['order', 'short_desc', 'long_desc', 'image']
+        fields = ['order', 'short_desc', 'long_desc', 'time', 'image']
 
 
 class RecipeSerializer(serializers.ModelSerializer):
